@@ -8,6 +8,7 @@ import { ILessons } from '@/app/types/types'
 
 
 export default function Lesson({ lesson, index, activeIndexLesson } : any) {
+  console.log(lesson.id)
   return (
     <div
       key={lesson.id + Math.random()}
@@ -17,14 +18,14 @@ export default function Lesson({ lesson, index, activeIndexLesson } : any) {
         style={{ backgroundColor: `${lesson.background}` }}>
 
         <Image
-          width={126}
-          height={126}
+          width={lesson.size.w}
+          height={lesson.size.h}
           src={`${lesson.img}`}
           alt="" />
       </div>
 
       <div className={styles.description}>
-        <p key={lesson.id + Math.random()}>{lesson.description}</p>
+        <p className={styles[lesson.title]} key={lesson.id + Math.random()}>{lesson.description}</p>
       </div>
     </div>
   )

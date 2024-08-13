@@ -69,7 +69,7 @@ export default function NavComponent() {
         </li>
         <li>
           {/* analytics */}
-          <a href="/">
+          <a href="/profile">
             <div className="logo">
               {AnalyticsSVG()}
             </div>

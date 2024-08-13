@@ -1,6 +1,6 @@
 export const SIZE_CARDS = 295
 
-export const  TIMEOUT = 5000
+export const TIMEOUT = 4000
 
 
 export const AVATARS = [
@@ -41,10 +41,15 @@ export const TASKS = [
   {
     id: 1,
     img: '/img/task/task1.png',
-    description: "Use the Pythagorean theorem  a² + b² = c²  to find a in a right triangle where b=12 and c=15",
+    description: "Use the Pythagorean theorem a² + b² = c²  to find a in a right triangle where b=12 and c=15",
     answer: "9",
     point: 70,
-    background: "#fef390"
+    background: "#fef390",
+    title: "task1",
+    size: {
+      w: 140,
+      h: 140
+    }
   },
   {
     id: 1,
@@ -52,7 +57,12 @@ export const TASKS = [
     description: "Triangle ABC is a right triangle where angle C=90°. FDEC is a square inscribed in triangle ABC. The leg AC = 6, and the diagonal of the square CD = 2√2. Find the area of the triangle.",
     answer: "9",
     point: 100,
-    background: "#d6edf4"
+    background: "#d6edf4",
+    title: "task2",
+    size: {
+      w: 134,
+      h: 170
+    }
   },
   {
     id: 3,
@@ -60,7 +70,13 @@ export const TASKS = [
     description: "Find the exact value of x without using a calculator.",
     answer: "4",
     point: 70,
-    background: "#ffb979"
+    background: "#ffb979",
+    title: "task3",
+    size: {
+      w: 207,
+      h: 85
+    }
+
   },
 
   {
@@ -69,6 +85,11 @@ export const TASKS = [
     description: "You need to move only one matchstick in the given arithmetic example  to make the equation correct (you can change both signs and numbers). Describe your reasoning on the next screen",
     answer: "9+3-4=12",
     point: 70,
-    background: "#fa7c87"
+    background: "#fa7c87",
+    title: "task4",
+    size: {
+      w: 200,
+      h: 74
+    }
   },
 ]
