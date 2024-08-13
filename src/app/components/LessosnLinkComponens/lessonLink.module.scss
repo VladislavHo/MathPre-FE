@@ -1,0 +1,52 @@
+.lessosnLinkCompoenents {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  // transform: translate(0, 50%);
+  z-index: 10;
+  backdrop-filter: blur(5px);
+  padding: 10px;
+  // background-color: #3ba2c1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .wrapperComponets{
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    background-color: var(--bg);
+    outline: 2px solid var(--block-2);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+    p{
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: 24px;
+      color: var(--text);
+      text-align: center;
+    }
+    a{
+      padding: 10px 15px;
+      border: none;
+      background: none;
+      background-color: #28c2ac;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+
+      font-family: var(--font-family);
+      font-weight: 400;
+      font-size: 18px;
+      color: var(--text);
+      text-align: center;
+    }
+
+  }
+}
