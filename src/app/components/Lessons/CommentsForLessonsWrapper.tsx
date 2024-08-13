@@ -12,35 +12,32 @@ interface ICommentsForLessonsWrapper {
     length: number
     activeIndexLesson: number
   }
-  updatePoins: () => void
-  handleClickComments: (index: number) => void
-  updateLessons: () => void
+  handleClickComments: () => void
 }
 export default function CommentsForLessonsWrapper(
   { commentText,
     numberOfAnswers,
-    updatePoins,
-    handleClickComments,
-    updateLessons }: ICommentsForLessonsWrapper) {
+    handleClickComments }: ICommentsForLessonsWrapper) {
 
+  console.log(numberOfAnswers.activeIndexLesson === numberOfAnswers.length)
 
   return (
     <>
 
-      {numberOfAnswers.length - 1 === numberOfAnswers.activeIndexLesson ? (
-          <ChatLessons />
+      {numberOfAnswers.length === numberOfAnswers.activeIndexLesson ? (
+        <ChatLessons />
 
       ) :
-      (
-        <div className={styles.wrapperComments}>
-        <span>{commentText}</span>
+        (
+          <div className={styles.wrapperComments}>
+            <span>{commentText}</span>
 
 
-          <button className={styles.done} onClick={() => handleClickComments(numberOfAnswers.activeIndexLesson)}>Done</button>
+            <button className={styles.done} onClick={() => handleClickComments()}>Done</button>
 
 
-      </div>
-      )
+          </div>
+        )
       }
 
 

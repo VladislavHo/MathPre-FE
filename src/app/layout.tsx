@@ -23,10 +23,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
 
+        <Suspense>
+
+          <main>{children}</main>
+        </Suspense>
 
 
-
-        <main>{children}</main>
 
 
 

@@ -210,6 +210,27 @@
       }
     }
 
+    .buttonWrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 10px;
+      .describe {
+        border-radius: 40px;
+        padding: 10px 98px;
+        background: var(--block-1);
+        border: 0;
+        overflow: 0;
+        font-family: var(--font-family);
+        font-weight: 400;
+        font-size: 18px;
+        text-align: center;
+        color: var(--title);
+
+        cursor: pointer;
+      }
+    }
+
 
     form {
 

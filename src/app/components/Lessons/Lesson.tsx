@@ -8,7 +8,6 @@ import { ILessons } from '@/app/types/types'
 
 
 export default function Lesson({ lesson, index, activeIndexLesson } : any) {
-  console.log(lesson.id)
   return (
     <div
       key={lesson.id + Math.random()}

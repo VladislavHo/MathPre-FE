@@ -12,15 +12,18 @@ import CommentsForLessonsWrapper from './CommentsForLessonsWrapper';
 import Lesson from './Lesson';
 import { observer } from 'mobx-react-lite';
 import store from '@/app/store/store';
+import ChatLessons from './ChatLessons';
 // import ChatLessons from './ChatLessons';
 
 const LessonsField = observer(() => {
-  const TIMEOUTMIN = 30000
-  const TIMEOUTMAX = 60000 * 2
+  const TIMEOUTMIN = 30000 //30sec 
+  const TIMEOUTMAX = 60000 * 2 //2min 
+
   const [inputValue, setInputValue] = useState('')
   const [lessonsData, setLessonsData] = useState<any>([])
   const [translateValue, setTranslateValue] = useState(0)
-  const [activeWrapperComments, setActiveWrapperComments] = useState(false)
+  const [isActiveCommentsResult, setIsActiveComments] = useState(false)
+  const [isActiveChatLessons, setIsActiveChatLessons] = useState(false)
   const [commentText, setCommentText] = useState('')
   const [numberOfAnswers, setNumberOfAnswers] = useState({
     correct: 0,
@@ -35,9 +38,9 @@ const LessonsField = observer(() => {
     setNumberOfAnswers((prev) => ({
       ...prev,
       // poinsInfo: lessons[0].totalPoints!,
-      length: TASKS.length - 1
+      length: lessonsData.length - 1
     }))
-  }, [])
+  }, [lessonsData])
 
 
 
@@ -46,13 +49,25 @@ const LessonsField = observer(() => {
   useEffect(() => {
 
     const timer = setTimeout(() => {
-      handleClickComments()
 
-    }, numberOfAnswers.activeIndexLesson === 0 ? TIMEOUTMIN : TIMEOUTMAX);
+      setNumberOfAnswers((prev) => ({
+        ...prev,
+        activeIndexLesson: prev.activeIndexLesson + 1
+      }))
+      setTranslateValue((SIZE_CARDS + 20) * (numberOfAnswers.activeIndexLesson + 1))
+
+    }, numberOfAnswers.activeIndexLesson === 0 || 2 ? TIMEOUTMIN : TIMEOUTMAX);
 
 
     if (numberOfAnswers.activeIndexLesson === lessonsData.length - 1) {
       clearTimeout(timer);
+
+      const timer2 = setTimeout(() => {
+        setIsActiveChatLessons(true)
+
+      }, TIMEOUTMIN)
+
+      return () => clearTimeout(timer2);
     }
 
 
@@ -63,8 +78,6 @@ const LessonsField = observer(() => {
 
 
   }, [numberOfAnswers])
-
-
 
 
 
@@ -96,17 +109,17 @@ const LessonsField = observer(() => {
 
       setNumberOfAnswers(prev => ({
         ...prev,
-        poins: prev.poins + (TASKS[index]?.point!),
+        poins: prev.poins + (lessonsData![index]?.point!),
         correct: prev.correct + 1,
         poinsInfo: prev.poinsInfo + lessonsData![numberOfAnswers.activeIndexLesson]?.point!,
       }))
 
-      setActiveWrapperComments(true)
+      setIsActiveComments(true)
 
 
     } else {
-      setCommentText(`You're wrong. Try again! 🥺`)
-      setActiveWrapperComments(true)
+      setCommentText(`You're wrong. 🥺`)
+      setIsActiveComments(true)
       setNumberOfAnswers(prev => ({
         ...prev,
         wrong: prev.wrong + 1,
@@ -116,11 +129,9 @@ const LessonsField = observer(() => {
 
   }
 
-  useEffect(() => {
 
-
-  }, [numberOfAnswers])
   const handleClickComments = () => {
+    console.log(true)
     store.setPointsAction(+numberOfAnswers.poinsInfo)
     store.setWinsAction(1)
     setTranslateValue((SIZE_CARDS + 20) * (numberOfAnswers.activeIndexLesson + 1))
@@ -130,36 +141,10 @@ const LessonsField = observer(() => {
       ...prev,
       activeIndexLesson: prev.activeIndexLesson + 1
     }))
-    setActiveWrapperComments(false)
+    setIsActiveComments(false)
     setInputValue("")
   }
 
-
-  const updateLessons = () => {
-    setTranslateValue(0)
-    setNumberOfAnswers({
-      correct: 0,
-      wrong: 0,
-      poins: 0,
-      poinsInfo: 0,
-      length: TASKS.length - 1,
-      activeIndexLesson: 0
-    })
-    setActiveWrapperComments(false)
-    setInputValue("")
-  }
-
-
-  const updatePoins = async () => {
-    try {
-
-
-    } catch (error) {
-      console.log(error)
-    }
-
-
-  }
 
   return (
     <>
@@ -167,14 +152,15 @@ const LessonsField = observer(() => {
       <div className={styles.lessonSection}>
         <AvatarsIntro />
         <div className={styles.lessonsFiled}>
+          {isActiveChatLessons && (
+            <ChatLessons />
 
-          {activeWrapperComments && (
+          )}
+          {isActiveCommentsResult && (
             <CommentsForLessonsWrapper
               commentText={commentText}
               numberOfAnswers={numberOfAnswers}
-              updatePoins={updatePoins}
               handleClickComments={handleClickComments}
-              updateLessons={updateLessons}
             />
           )}
           {/* Header */}
@@ -194,8 +180,8 @@ const LessonsField = observer(() => {
                 <Image src={'/svg/win.svg'} width={13} height={13} alt="svg" />
 
                 <span>
-                  {numberOfAnswers?.poinsInfo}
-                  / 300</span>
+                  {`${numberOfAnswers?.poinsInfo} `}
+                  &#32;/ 300</span>
 
               </div>
 
@@ -228,12 +214,23 @@ const LessonsField = observer(() => {
             </div>
           </div>
 
-          <form onSubmit={(e) => checkedAnswer(e, numberOfAnswers.activeIndexLesson)}>
-            <div className={styles.textarea}>
-              <input value={inputValue} type="text" name="text" placeholder='Your Answer...' onChange={(e) => setInputValue(e.target.value)} />
-              <button className={styles.lessonsSend}>Send</button>
+
+          {lessonsData.length - 1 === numberOfAnswers.activeIndexLesson ? (
+            <div className={styles.buttonWrapper}>
+
+              <button className={styles.describe} onClick={() => setIsActiveChatLessons(true)}>Describe</button>
             </div>
-          </form>
+          ) : (
+
+            <form onSubmit={(e) => checkedAnswer(e, numberOfAnswers.activeIndexLesson)}>
+              <div className={styles.textarea}>
+                <input value={inputValue} type="text" name="text" placeholder='Your Answer...' onChange={(e) => setInputValue(e.target.value)} />
+                <button className={styles.lessonsSend}>Send</button>
+              </div>
+            </form>
+          )}
+
+
         </div>
       </div>
     </>
