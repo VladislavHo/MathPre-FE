@@ -118,10 +118,11 @@ const LessonsField = observer(() => {
 
   useEffect(() => {
 
-    store.setPointsAction(+numberOfAnswers.poinsInfo)
+
   }, [numberOfAnswers])
   const handleClickComments = () => {
-
+    store.setPointsAction(+numberOfAnswers.poinsInfo)
+    store.setWinsAction(1)
     setTranslateValue((SIZE_CARDS + 20) * (numberOfAnswers.activeIndexLesson + 1))
 
     // setActiveIndexLesson(prev => prev + 1)

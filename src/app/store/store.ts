@@ -3,7 +3,8 @@ import { makeAutoObservable } from 'mobx';
 
 class Poins {
   points = 0
-  constructor(){
+  wins = 0
+  constructor() {
     makeAutoObservable(this);
   }
 
@@ -11,6 +12,11 @@ class Poins {
 
   setPointsAction = (points: number) => {
     this.points = points
+  }
+
+
+  setWinsAction = (wins: number) => {
+    this.wins = wins
   }
 
 }

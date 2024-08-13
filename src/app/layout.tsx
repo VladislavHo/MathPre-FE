@@ -24,13 +24,13 @@ export default function RootLayout({
       <body className={inter.className}>
 
 
-        <Provider>
-          <Suspense>
-            <main>{children}</main>
 
-          </Suspense>
 
-        </Provider>
+        <main>{children}</main>
+
+
+
+
       </body>
     </html>
   );
