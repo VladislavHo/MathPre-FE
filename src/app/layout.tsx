@@ -3,8 +3,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Nav from "./components/Nav/Nav";
-import { Provider } from "./components/Provider/Provider";
+
 import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -22,17 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-
         <Suspense>
-
           <main>{children}</main>
         </Suspense>
-
-
-
-
-
-
       </body>
     </html>
   );
