@@ -1,10 +1,9 @@
 "use client"
 
-import { IAvatars } from "@/app/types/types";
 import { useEffect, useState } from "react";
 import styles from './avatar.module.scss'
 import Image from "next/image";
-import { redirect, useRouter } from "next/navigation"
+import {  useRouter } from "next/navigation"
 import Link from "next/link";
 import NavComponent from "../Nav/NavComponent";
 import { AVATARS } from "@/app/var/var";
@@ -13,7 +12,7 @@ import { AVATARS } from "@/app/var/var";
 
 
 export default function AvatarsComponent() {
-  // const [avatars, setAvatars] = useState<IAvatar[]>([]);
+
   const [selectedAvatar, setSelectedAvatar] = useState(3);
   const route = useRouter();
 
@@ -24,25 +23,14 @@ export default function AvatarsComponent() {
 
       route.push("/chat")
     }, 3000)
-  }, [])
+  }, [route]);
 
   const handleClick = (id: number) => {
     setSelectedAvatar(id);
   }
 
 
-  const updateUserAvatar = async () => {
 
-    try {
-
-
-    } catch (error) {
-      console.log(error)
-    }
-
-
-
-  }
 
   return (
     <>
@@ -75,7 +63,7 @@ export default function AvatarsComponent() {
 
         <div className={styles.linkWrapper}>
 
-          <Link onClick={() => updateUserAvatar()} href={"/chat"}>Done</Link>
+          <Link  href={"/chat"}>Done</Link>
         </div>
       </div>
     </>

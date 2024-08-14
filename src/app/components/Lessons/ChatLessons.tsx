@@ -19,7 +19,7 @@ export default function ChatLessons() {
       // setIsOpen(true)
       route.push('/profile')
     }, 10000);
-  }, [])
+  }, [route])
 
 
 
@@ -46,7 +46,7 @@ export default function ChatLessons() {
               </div>
             </div>
           </div>
-          <form>
+          <form onSubmit={(e) => e.preventDefault()}>
             <div className={styles.textArea}>
               <input type="text" placeholder='Your message...' />
               <button className={styles.send}>

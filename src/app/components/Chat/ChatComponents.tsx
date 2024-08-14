@@ -8,17 +8,14 @@ import styles from './chat.module.scss'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 export default function ChatComponents() {
-  const router = useRouter()
+  const route = useRouter()
   useEffect(() => {
     const timer = setTimeout(() => {
-
-
-      router.push("/lessons")
+      route.push("/lessons")
     }, TIMEOUT);
 
-    // Очистка таймера при размонтировании компонента
     return () => clearTimeout(timer);
-  }, []);
+  }, [route]);
 
   return (
     <>

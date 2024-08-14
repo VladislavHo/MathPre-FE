@@ -1,6 +1,5 @@
 "use client"
 
-import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 
 import { FormEventHandler, useEffect, useState } from "react";
@@ -12,7 +11,7 @@ useEffect(() => {
   setTimeout(() => {
     route.push("/avatars")
   }, 3000)
-}, [])
+}, [route])
 
 
 
@@ -50,7 +49,7 @@ useEffect(() => {
 
 
           <div className={styles.socialMediaSigIn}>
-            <a href="#" onClick={() => signIn('google', { callbackUrl: '/avatars', redirect: true })}>
+            <a href="#" >
               <Image src={"/svg/google.svg"} alt="google" width={34} height={34} />
             </a>
 
