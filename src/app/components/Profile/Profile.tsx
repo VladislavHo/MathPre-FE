@@ -55,7 +55,7 @@ const ProfileCompoent = observer(() => {
                 </div>
 
                 <div className={styles.card}>
-                  <h6>Winns</h6>
+                  <h6>Wins</h6>
                   <span>{store.wins} <Image src="/svg/wins.svg" alt="coin" width={43} height={43} /></span>
                 </div>
 
